@@ -1,2 +1,2 @@
 - name: starting dse
-  service: name=dse enabled=yes state=started
+  service: name=cassandra enabled=yes state=started

@@ -12,4 +12,4 @@
     - cassandra-tools={{ cassandra_version }}
 
 - name: configuring datastax enterprise
-  template: src=templates/cassandra.yaml dest=/etc/dse/cassandra/cassandra.yaml
+  template: src=templates/cassandra.yaml dest=/etc/cassandra/cassandra.yaml
