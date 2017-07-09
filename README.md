@@ -12,11 +12,11 @@ Make sure all of these are up-to-date.
 
 ##Provisioning
 
-Clone the project: ```git clone https://github.com/joeljacobson/vagrant-ansible-cassandra.git```
+Clone the project: ```git clone https://github.com/davidlu1001/ansible-cassandra-vagrant.git```
 
 In the project directory enter: ```vagrant up```
 
-Your cluster will be ready shortly depending on your internet connection. The initial boot takes some time as Ansible has to download, install and configure DataStax Enterprise across each VM. Subsequent reboots are fast.
+Your cluster will be ready shortly depending on your internet connection. The initial boot takes some time as Ansible has to download, install and configure DataStax Community across each VM. Subsequent reboots are fast.
 
 DSE and Opscenter will be automatically configured and started once installed. They will also be automatically started each time the VMs are booted.
 
