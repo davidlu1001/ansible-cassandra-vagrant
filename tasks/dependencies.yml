@@ -1,0 +1,39 @@
+- name: updating machine
+  #apt: update_cache=yes
+  shell: apt-get update
+
+- name: installing dependencies
+  #apt: pkg={{ item }} state=installed update-cache=yes
+  apt: pkg={{ item }} state=installed
+  with_items:
+  - curl
+  - htop
+  - python-software-properties
+  - python-setuptools
+  - python-cql
+  - python-support
+
+- name: Add Oracle Java PPA repo
+  apt_repository: repo='ppa:webupd8team/java'
+
+- name: Accept Oracle license (1/2)
+  shell: "echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-selections"
+
+- name: Accept Oracle license (2/2)
+  shell: "echo debconf shared/accepted-oracle-license-v1-1 seen true | debconf-set-selections"
+
+- name: Update APT cache
+  apt: update_cache=true
+
+- name: Install python-software-properties package
+  apt: pkg=python-software-properties state=present
+
+- name: Install python-setuptools package
+  apt: pkg=python-setuptools state=present
+
+- name: Install Oracle Java
+  apt: name=oracle-java8-installer state=latest
+
+- name: updating machine
+  #apt: update_cache=yes
+  shell: apt-get update

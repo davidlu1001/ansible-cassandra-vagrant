@@ -1,0 +1,60 @@
+---
+- hosts: opscenter
+  user: vagrant
+  become: yes
+  tasks:
+
+  - name: installing dependencies
+    apt: pkg={{ item }} state=installed
+    with_items:
+      - curl
+      - htop
+
+  - name: updating machine
+    #apt: update_cache=yes
+    shell: apt-get update
+
+  - name: adding oracle java repository
+    apt_repository: repo='ppa:webupd8team/java' state=present
+    register: java
+    until: java|success
+    retries: 5
+    delay: 5
+
+  - name: updating machine
+    #apt: update_cache=yes
+    shell: apt-get update
+
+  - name: preparing for java installation
+    shell: /bin/echo debconf shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
+
+  - name: installing oracle java
+    shell: DEBIAN_FRONTEND=noninteractive apt-get -y install oracle-java8-installer oracle-java8-set-default
+
+  - name: adding dse repo
+    apt_repository:
+      repo: deb http://debian.datastax.com/community stable main
+      state: present
+      filename: datastax.sources
+    register: dse_repo
+    until: dse_repo|success
+    retries: 5
+    delay: 5
+
+  - name: adding repo key
+    apt_key: url=https://debian.datastax.com/debian/repo_key state=present
+    register: dse_key
+    until: dse_key|success
+    retries: 5
+    delay: 5
+
+  - name: updating machine
+    #apt: update_cache=yes
+    shell: apt-get update
+
+  - name: installing opscenter
+    apt: pkg=opscenter state=installed update-cache=yes
+    register: opscenterd
+
+  - name: starting opscenter
+    service: name=opscenterd enabled=yes state=started

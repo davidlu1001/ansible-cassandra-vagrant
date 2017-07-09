@@ -1,0 +1,29 @@
+---
+- include: "{{ os_include_item }}"
+  with_first_found:
+    - "ppa-{{ ansible_distribution }}.yml"
+    - "ppa-{{ ansible_os_family }}.yml"
+  loop_control:
+    loop_var: os_include_item
+
+- name: adding dse repo
+  apt_repository:
+      #repo: deb http://datastaxrepo_gmail.com:utJVKEg4lKeaWTX@debian.datastax.com/enterprise stable main
+    repo: deb http://debian.datastax.com/community stable main
+    state: present
+    filename: datastax.sources
+  register: dse_repo
+  until: dse_repo|success
+  retries: 5
+  delay: 5
+
+- name: adding repo key
+  apt_key: url=https://debian.datastax.com/debian/repo_key state=present
+  register: dse_key
+  until: dse_key|success
+  retries: 5
+  delay: 5
+
+- name: updating machine
+  apt: update_cache=yes
+  #shell: apt-get update
