@@ -1,8 +1,8 @@
-#Introduction
+# Introduction
 
 Easily provision 3 DSE Cassandra nodes with Opscenter across 4 VMs using Ansible with Vagrant & Virtualbox.
 
-#Prerequisites
+# Prerequisites
 
 Make sure all of these are up-to-date.
 
@@ -10,7 +10,7 @@ Make sure all of these are up-to-date.
 * [Vagrant](https://www.vagrantup.com/downloads)
 * [Ansible](http://docs.ansible.com/intro_installation.html)
 
-#Provisioning
+# Provisioning
 
 Clone the project: ```git clone https://github.com/davidlu1001/ansible-cassandra-vagrant.git```
 
