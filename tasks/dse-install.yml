@@ -2,10 +2,11 @@
   #  apt: pkg=dse-full state=installed update-cache=yes
   #register: dse
 
+- include_vars: "../vars/version.yml"
+
 - name: package - install cassandra and dsc
   apt: pkg={{ item }}  state=installed
   with_items:
-      #- dsc{{ cassandra_major_version_nodots }}
     - dsc30={{ cassandra_major_version }}
     - cassandra={{ cassandra_version }}
     - cassandra-tools={{ cassandra_version }}

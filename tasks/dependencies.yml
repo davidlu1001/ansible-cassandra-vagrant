@@ -10,8 +10,6 @@
   - htop
   - python-software-properties
   - python-setuptools
-  - python-cql
-  - python-support
 
 - name: Add Oracle Java PPA repo
   apt_repository: repo='ppa:webupd8team/java'
@@ -30,6 +28,10 @@
 
 - name: Install python-setuptools package
   apt: pkg=python-setuptools state=present
+
+- name: Install python-support package
+  apt:
+    deb: http://launchpadlibrarian.net/109052632/python-support_1.0.15_all.deb
 
 - name: Install Oracle Java
   apt: name=oracle-java8-installer state=latest

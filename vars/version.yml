@@ -1,0 +1,5 @@
+---
+# defaults file for cassandra
+cassandra_major_version: '3.0.9-1'
+cassandra_major_version_nodots: '{{ cassandra_major_version | regex_replace("\.","") }}'
+cassandra_version: '3.0.9'
